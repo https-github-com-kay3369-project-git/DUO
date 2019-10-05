@@ -6,19 +6,25 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+
 public class MybatisManager {
-	private MybatisManager() {};	// 생성자
+	private MybatisManager() {}; //생성자 
 	
-	private static SqlSessionFactory instance;	// SqlSession 객체를 만들어내는 SqlSessioFactory 참조변수.mybatis query를 수행하는 객체
+	// SqlSession객체를 만들어내는 SqlSessionFactory참조 변수
+	// mybatis query를 수행하는 객체
+	// mybatis의 진행순서 SqlSessionFactoryBuilder->sqlSessionFactory->sqlSession
+	private static SqlSessionFactory instance;
+	
 	public static SqlSessionFactory getInstance() {
-		Reader reader = null;
-		if(reader == null) {
+		Reader reader = null; //이거 선언했으면 if 하고 바로 넣을 수 있다
+		if(reader == null){
+			//읽기용
 			try {
-				// SqlMapConfig.xml(mybatis환경설정) 파일의 정보를 읽어들이는 코드
+				//SqlMapConfig.xml(mybatis환경설정)파일의 정보를 읽어오는 코드
 				String resource = "sqlMap/SqlMapConfig.xml";
 				reader = Resources.getResourceAsReader(resource);
 				
-				// SqlSessionFactory객체 생성
+				//sqlSessionFactory객체 생성 instance 자바 DB 연결해주는 역할을 함, 실제 객체화 시켜줌
 				instance = new SqlSessionFactoryBuilder().build(reader);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -30,7 +36,7 @@ public class MybatisManager {
 				}
 			}
 		}
-		
 		return instance;
 	}
+
 }
