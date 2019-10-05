@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<a href="#">공지사항</a>
+<a href="#">게시판</a>
+<a href="#">문의사항</a>
+<a></a>
 </body>
 </html>

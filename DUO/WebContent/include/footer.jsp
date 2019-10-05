@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<hr>
+<h4>DATEMANAGER/2019&#169;dUO </h4>
 </body>
 </html>
