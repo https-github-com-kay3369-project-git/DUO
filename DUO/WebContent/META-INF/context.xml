@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
+    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
+
+   <Resource
+   			name="mysqlDB"
+            auth="Container"
+            type="javax.sql.DataSource"
+            username="root"
+            password="1234"
+            driverClassName="oracle.jdbc.????????"
+            url="jdbc:oracle:thin:@localhost:1521:xe"
+            maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+            />
+            
+	<Resource
+   			name="oraDB"
+            auth="Container"
+            type="javax.sql.DataSource"
+            driverClassName="oracle.jdbc.OracleDriver"
+            url="jdbc:oracle:thin:@localhost:1521:orcl"
+            username="scott"
+            password="1234"
+            maxActive="50"
+            />        
+</Context>
