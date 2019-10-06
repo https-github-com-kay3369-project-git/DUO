@@ -5,7 +5,7 @@
  <mapper namespace="member">
  
  <!-- 회원 가입 -->
- <insert id="addMember" parameterType="member.dto.memberDTO">
+ <insert id="addMember" parameterType="member">
  	insert into member(id, pwd, nick_name, email, address, gender, birth, phone, photo, point, admin)
 	 	values
 	 	(
