@@ -10,8 +10,8 @@
 	 	values
 	 	(
 	 		#{id}, #{pwd}, #{nick_name}, #{email}, #{address}, 
-	 		#{gender}, #{birth}, #{phone}, #{photo},
-	 		#{point}, #{admin}
+	 		#{gender}, SYSDATE , #{phone}, #{photo},
+	 	(select nvl(MAX(point)+100,0)from member), #{admin}
 	 	)
  </insert>
  

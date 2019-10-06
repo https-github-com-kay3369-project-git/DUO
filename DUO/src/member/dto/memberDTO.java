@@ -9,12 +9,12 @@ public class memberDTO {
 	private String email;
 	private String address;
 	private String gender;
-	private String birth;
+	private Date birth;
 	private String phone;
 	private int point;
 	private String photo;
 	private int admin;
-
+	
 	//setter, getter, toString
 	public String getId() {
 		return id;
@@ -52,10 +52,10 @@ public class memberDTO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getBirth() {
+	public Date getBirth() {
 		return birth;
 	}
-	public void setBirth(String birth) {
+	public void setBirth(Date birth) {
 		this.birth = birth;
 	}
 	public String getPhone() {
@@ -82,13 +82,14 @@ public class memberDTO {
 	public void setAdmin(int admin) {
 		this.admin = admin;
 	}
-	
 	@Override
 	public String toString() {
 		return "memberDTO [id=" + id + ", pwd=" + pwd + ", nick_name=" + nick_name + ", email=" + email + ", address="
 				+ address + ", gender=" + gender + ", birth=" + birth + ", phone=" + phone + ", point=" + point
 				+ ", photo=" + photo + ", admin=" + admin + "]";
 	}
+
+
 	
 	
 }
