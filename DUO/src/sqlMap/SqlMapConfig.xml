@@ -1,28 +1,23 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-<typeAliases>
-<!--알리아스 설정 : ex) typeAlias type="전체경로" alias="별칭"  -->
-
-</typeAliases>
-
-<!-- DB연결 참조 -->
+	<typeAliases>	</typeAliases><!-- 클래스 이름에 별칭 -->
+	
+  <!-- DB연결 참조 -->
   <environments default="">
     <environment id="">
       <transactionManager type="JDBC"/>
-      <!-- Connection Pool방식  --> 
+      <!-- Connection Pool 방식 -->
       <dataSource type="JNDI">
-        <property name="data_source" value="java:comp/env/jdbc/oracle" />
+        <property name="data_source" value="java:comp/env/project"/>
       </dataSource>
     </environment>
   </environments>
   
-  <!--sql 관련 설정  -->
+  <!--  sql관련 설정 -->  
   <mappers>
-  
-  	<mapper resource="mapper/notice.xml"/>
-  	<mapper resource="member.mapper/member.xml"/>
+    <mapper resource="aticleboard/mapper/board.xml"/>
   </mappers>
 </configuration>

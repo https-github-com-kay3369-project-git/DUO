@@ -2,28 +2,17 @@
 
 <Context>
 
-    <!-- Default set of monitored resources. If one of these changes, the -->
-	<!-- web application will be reloaded. -->
-	<WatchedResource>WEB-INF/web.xml</WatchedResource>
-	<WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
-	<WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
+    <!-- Default set of monitored resources. If one of these changes, the    -->
+    <!-- web application will be reloaded.      -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
+    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
 
-	<!-- Uncomment this to disable session persistence across Tomcat restarts -->
-	<!-- <Manager pathname="" /> -->
-	
-	<Resource
-		name="jdbc/mysql"
-		auth="Container"
-		type="javax.sql.DataSource"
-		driverClassName="com.mysql.jdbc.Driver"
-		url="jdbc:mysql://localhost:3306/duo?useSSL=false&amp;serverTimezone=UTC"
-		username="root"
-		password="1234"
-		maxActive="50"
-		
-	/>
-		<Resource
-		name="jdbc/oracle"
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!-- <Manager pathname="" /> -->
+    
+    <Resource
+    	name="project"
 		auth="Container"
 		type="javax.sql.DataSource"
 		driverClassName="oracle.jdbc.driver.OracleDriver"
@@ -31,9 +20,5 @@
 		username="scott"
 		password="1234"
 		maxActive="50"
-		
-	/>
-		
-	 
-	
+    />
 </Context>
