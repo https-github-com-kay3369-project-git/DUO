@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
-<c:set var="path" value="${pageContext.request.contextPath }"/> 
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="../script/jquery-3.4.1.min.js"></script>
-
+<%@ include file="include.jsp" %>
 <title>회원가입</title>
 
 <script>
@@ -47,8 +45,8 @@
 				document.addMemberForm.submit();
 			});
 			$('#btnCancel').click(function(){
-				console.log("btnCancel ok");
-				location.href = "${path}/index.jsp";
+				colsole.lot("btnCancel ok");
+				location.href = "../index.do";
 			});
 		});
 		
@@ -56,19 +54,16 @@
 	</script>
 </head>
 <body>
-<%@ include file="../include/header.jsp" %>
-	<h2>회원 가입</h2>
-
-	<center>
-<form action="" name="addMemberForm" method="post" enctype="multipart/form-data" >
-		'*' 표시 항목은 필수 입력 항목입니다.
+	<h2>회원 가입</h2><hr/>
+	'*' 표시 항목은 필수 입력 항목입니다.
+<form action="" name="addMemberForm" method="post" enctype="multipart/form-data">
 	<table>
 		<tr>
 			<td>*아이디</td>
 			<td>
 			<input type="text" name="id" id="id" size="20"/>
 			<input type="hidden" name="reid" id="reid" size="10"/>
-			<input type="button" value="중복확인"  id="" onclick="return idCheck()"/>
+			<input type="button" value="중복확인" onclick="return idCheck()"/>
 			</td>
 		</tr>
 		<tr>
@@ -91,9 +86,9 @@
 			<td>
 			<input type="text" name="email1" id="email1" size=20> @
 			<select name="email2" id="email2">
-				<option value="네이버">naver.com</option>
-								<option value="다음">hanmail.com</option>
-				<option value="구글">google.com</option>
+				<option value="naver.com">naver.com</option>
+				<option value="hanmail.net">hanmail.com</option>
+				<option value="google.com">google.com</option>
 				<option value="직접입력">직접입력</option>
 			</select>
 			</td>
@@ -131,12 +126,11 @@
 		<tr>
 			<td colspan="2">
 			<input type="button" id="btnAdd" value="가입"/>
-			<input type="reset" id="btnCancel" name='btnCancel' value="취소"/>
+			<input type="reset" id="btnCancel" value="취소"/>
 			</td>
 		</tr>
 	</table>
-
+	
 </form>
-</center>
 </body>
 </html>

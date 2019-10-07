@@ -4,12 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -99,7 +100,43 @@ public class memberController extends HttpServlet {
 			String page = request.getContextPath() + "/board_servlet/addMember.do";
 			response.sendRedirect(page);	// response.sendRedirect: forward와 달리 완전히 제어권을 page 쪽으로 넘겨줌.
 		}
+		else if(url.contains("login.do")) {
+			
+			System.out.println("login.do OK...");
+			
+			String id = request.getParameter("id");
+			String pwd = request.getParameter("pwd");
+			System.out.println("id:"+id+" pwd:"+pwd);
+			
+			// 로그인 정보 체크 요청 처리(아이디나 비번 틀리면 null 값이 리턴)
+			memberDTO result = dao.loginCheck(id, pwd);
+			
+			String page = "";	// 
+			if(result != null) {
+				System.out.println("로그인정보 일치...");
+				// 아이디랑 닉네임을 어캐 뷰로 뿌려주지??????
+				
+				request.setAttribute("dto", dao.loginCheck(id, pwd));
+				
+				System.out.println("로그인정보 일치...55");
+
+				page = "/member/login_success.jsp";
+				RequestDispatcher rd = request.getRequestDispatcher(page);
+				rd.forward(request, response);
+			}else {
+				System.out.println("로그인정보 불일치...");
+				
+				page = "../index.jsp";	// 경로 어캐해야하지
+				response.sendRedirect(page);
+			}
 		
+		}else if(url.contains("login_success.do")) {
+			
+			System.out.println("login_success.do OK...");
+			
+
+		}
+			
 		
 		
 	}
