@@ -35,8 +35,8 @@ public class noticeController extends HttpServlet {
 			throws ServletException, IOException {
 	
 		  System.out.println("Controller...ok"); noticeDAO dao = new noticeDAO();
-		  noticeDTO dto = new noticeDTO(); String url=
-		  request.getRequestURL().toString(); //주소를 문자화 해서 찍어본다
+		  noticeDTO dto = new noticeDTO(); 
+		  String url= request.getRequestURL().toString(); //주소를 문자화 해서 찍어본다
 		  
 		  System.out.println(url);
 		  
@@ -67,6 +67,7 @@ public class noticeController extends HttpServlet {
 			
 			String page=request.getContextPath()+"/notice_servlet/list.do";
 			response.sendRedirect(page);
+			
 			
 		  }
 		  //공지사항 목록
