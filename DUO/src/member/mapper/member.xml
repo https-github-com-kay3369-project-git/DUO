@@ -5,15 +5,18 @@
  <mapper namespace="member">
  
  <!-- 회원 가입 -->
- <insert id="addMember" parameterType="member">
+ <insert id="addMember" parameterType="member.dto.memberDTO">
  	insert into member(id, pwd, nick_name, email, address, gender, birth, phone, photo, point, admin)
 	 	values
 	 	(
 	 		#{id}, #{pwd}, #{nick_name}, #{email}, #{address}, 
-	 		#{gender}, SYSDATE , #{phone}, #{photo},
-	 	(select nvl(MAX(point)+100,0)from member), #{admin}
+	 		#{gender}, #{birth}, #{phone}, #{photo},
+	 		#{point}, #{admin}
 	 	)
  </insert>
  
- <!-- 회원 정보 수정 -->
+ <!-- 로그인 -->
+ <select id="login_check" resultType="member.dto.memberDTO">
+ 	select * from member where id=#{id} and pwd = #{pwd}
+ </select>
  </mapper>

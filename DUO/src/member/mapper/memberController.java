@@ -109,7 +109,7 @@ public class memberController extends HttpServlet {
 			System.out.println("id:"+id+" pwd:"+pwd);
 			
 			// 로그인 정보 체크 요청 처리(아이디나 비번 틀리면 null 값이 리턴)
-			String result = dao.loginCheck(id, pwd);
+			memberDTO result = dao.loginCheck(id, pwd);
 			
 			String page = "";	// 
 			if(result != null) {
@@ -118,10 +118,7 @@ public class memberController extends HttpServlet {
 				
 				request.setAttribute("dto", dao.loginCheck(id, pwd));
 				
-				memberDTO dto = new memberDTO();
 				System.out.println("로그인정보 일치...55");
-				String nick_name = dto.getNick_name();
-				id = dto.getId();
 
 				page = "/member/login_success.jsp";
 				RequestDispatcher rd = request.getRequestDispatcher(page);
@@ -129,7 +126,7 @@ public class memberController extends HttpServlet {
 			}else {
 				System.out.println("로그인정보 불일치...");
 				
-				page = "index.jsp";	// 경로 어캐해야하지
+				page = "../index.jsp";	// 경로 어캐해야하지
 				response.sendRedirect(page);
 			}
 		
