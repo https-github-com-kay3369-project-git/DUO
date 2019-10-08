@@ -10,10 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.dao.BoardDAO;
-import board.dto.BoardCommentDTO;
-import board.dto.BoardDTO;
-
 
 @WebServlet("/board_servlet/*")
 public class boardController extends HttpServlet {
@@ -45,30 +41,30 @@ public class boardController extends HttpServlet {
 					int totalPage = (int)Math.ceil(count*1.0/page_scale);	// 총 페이지수
 					
 				    System.out.println("총 페이지 수 : " + totalPage);
-			/*
-			 * int block_scale = 10; int total_block =
-			 * (int)Math.ceil(totalPage*1.0/block_scale);
-			 * 
-			 * int cur_block = (int)Math.ceil(curPage)-1/block_scale+1; int block_start =
-			 * (cur_block-1)*block_scale+1; int block_end = block_start+block_scale-1;
-			 * 
-			 * if (block_end > totalPage) block_end = totalPage; int prev_page = cur_block
-			 * == 1? 1:(cur_block-1)*block_scale; int next_page = cur_block > total_block ?
-			 * (cur_block*block_scale):(cur_block+1)*block_scale;
-			 * 
-			 * System.out.println("cur_block : " + cur_block);
-			 * System.out.println("block_start : " + block_start);
-			 * System.out.println("block_end : " + block_end);
-			 * System.out.println("prev_page : " + prev_page);
-			 * System.out.println("next_page : " + next_page);
-			 * 
-			 * request.setAttribute("cur_block", cur_block);
-			 * request.setAttribute("total_block", total_block);
-			 * request.setAttribute("blockstart", block_start);
-			 * request.setAttribute("blockend", block_end);
-			 * request.setAttribute("prev_page", prev_page);
-			 * request.setAttribute("next_page", next_page);
-			 */
+			
+					 int block_scale = 10; int total_block =
+					 (int)Math.ceil(totalPage*1.0/block_scale);
+					 
+					 int cur_block = (int)Math.ceil(curPage)-1/block_scale+1; int block_start =
+					 (cur_block-1)*block_scale+1; int block_end = block_start+block_scale-1;
+					 
+					 if (block_end > totalPage) block_end = totalPage; int prev_page = cur_block
+					 == 1? 1:(cur_block-1)*block_scale; int next_page = cur_block > total_block ?
+					 (cur_block*block_scale):(cur_block+1)*block_scale;
+					 
+					 System.out.println("cur_block : " + cur_block);
+					 System.out.println("block_start : " + block_start);
+					 System.out.println("block_end : " + block_end);
+					 System.out.println("prev_page : " + prev_page);
+					 System.out.println("next_page : " + next_page);
+					 
+					 request.setAttribute("cur_block", cur_block);
+					 request.setAttribute("total_block", total_block);
+					 request.setAttribute("blockstart", block_start);
+					 request.setAttribute("blockend", block_end);
+					 request.setAttribute("prev_page", prev_page);
+					 request.setAttribute("next_page", next_page);
+			 
 					
 					int start = (curPage-1)*page_scale + 1;
 					int end = start + page_scale - 1;
@@ -230,6 +226,81 @@ public class boardController extends HttpServlet {
 						String page = "${path}/board_servlet/list.do";
 						response.sendRedirect(page);
 					}
+					
+				// 관리자모드 게시판 전체 목록
+				if(url.contains("allList.do")) {
+					System.out.println("allList.do ok...");
+					
+					int curPage = 1;
+					if(request.getParameter("curPage") != null) {
+						curPage = Integer.parseInt(request.getParameter("curPage"));
+					}
+					
+					// 페이지 나누기
+					// 각 페이지에 해당되는 레코드의 시작번호, 마지막번호 계산
+					int count = dao.recordCount();							// 총레코드 갯수 추출
+					int page_scale = 10;									// 한페이지에 표시되는 레코드 갯수 
+					int totPage = (int)Math.ceil(count*1.0/page_scale);		// 총 페이지 수=i
+					System.out.println("총페이지수:"+totPage);
+					
+					// DB에 list 요청하여 결과값을 가져옴
+					int start = curPage*page_scale-(page_scale-1);			// 레코드 시작번호:(현재페이지번호*페이지당레코드갯수)-9
+					int end = curPage*page_scale;							// 레코드 마지막번호:시작페이지번호*페이지당레코드갯수
+					System.out.println("현재페이지번호:"+curPage);
+					System.out.println("현재페이지 시작번호:"+start);
+					System.out.println("현재페이지 마지막번호:"+end);
+					
+					// 각 페이지에 해당되는 블록 시작번호, 마지막번호 계산
+					// 페이지 블록 갯수 계산
+					int block_scale = 10;
+					int tot_block = (int) Math.ceil(totPage*1.0/block_scale);
+					
+					int cur_block = (int) Math.ceil(curPage*1.0/block_scale);
+					int block_start = (cur_block-1)*block_scale +1;
+					int block_end = block_start+block_scale-1;
+					
+					if(block_end>totPage) block_end=totPage;
+					int prev_page = cur_block == 1? 1: (cur_block-1)*block_scale;
+					int next_page = cur_block>tot_block? (cur_block*block_scale) : cur_block*block_scale+1;
+					
+					if(next_page>=totPage) next_page=totPage;
+					
+					System.out.println("cur_block:"+cur_block);
+					System.out.println("block_start:"+block_start);
+					System.out.println("block_end:"+block_end);
+					
+					// list view페이지에 블록의 시작번호, 마지막번호 값을 전달하기 위해 보관
+					request.setAttribute("curBlock", cur_block);
+					request.setAttribute("totBlock", tot_block);
+					request.setAttribute("block_start", block_start);
+					request.setAttribute("block_end", block_end);
+					request.setAttribute("prev_page", prev_page);
+					request.setAttribute("next_page", next_page);
+								
+					List<BoardDTO> listAll = dao.listAll();
+					request.setAttribute("listAll", listAll);
+					
+					// 페이징 네비게이션에 관련 정보 보관
+					request.setAttribute("totPage", totPage);
+					request.setAttribute("page_scale", page_scale);
+					request.setAttribute("block_scale", block_scale);
+					request.setAttribute("start", start);
+					request.setAttribute("end", end);
+					
+					String page ="/staff/AllboardList.jsp";
+					RequestDispatcher rd = request.getRequestDispatcher(page);
+					rd.forward(request, response);
+					}
+					
+				// 관리자모드 게시판 삭제
+				else if(url.contains("delboard.do")) {
+					System.out.println("delboard.do");
+					int num = Integer.parseInt(request.getParameter("num"));
+					dao.deleteone(num);
+					
+					String page = request.getContextPath()+"/board_servlet/allList.do";
+					response.sendRedirect(page);
+				}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

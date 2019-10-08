@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
-      <c:set var="path" value="${pageContext.request.contextPath }"/> 
+   <c:set var="path" value="${pageContext.request.contextPath }"/> 
       
 <!DOCTYPE html>
 <html>
@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 <script src="../script/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-$(function(){
+/* $(function(){
 		console.log('jquery..ok');
 		
 		
@@ -24,7 +24,15 @@ $(function(){
 			}
 			
 		});
-	});
+	}); */
+	function del(n_no){
+	
+		if(confirm('삭제하시겠습니까')){
+			location.href="${path}/notice_servlet/delnotice.do?n_no="+n_no;
+		
+		}
+		
+	}
 </script>
 </head>
 <body>
@@ -50,8 +58,9 @@ $(function(){
 			<td>${dto.n_count }</td>
 			
 			<td>
-			<input type="hidden" name="n_no" value="${dto.n_no }">
-			<input type="button" id="btnDel"  value="삭제">
+			<%-- <input type="hidden" name="n_no" value="${dto.n_no }"> --%>
+			<!-- <input type="button" id="btnDel"  value="삭제"> -->
+			<input type="button" onclick="del('${dto.n_no}')"  value="삭제">
 			</td>
 		</tr>
 		</c:forEach>

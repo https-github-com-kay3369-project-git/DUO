@@ -49,7 +49,7 @@
 	<c:if test="${dto.userid !=null }">
 		${dto.userid }님 환영합니다
 	</c:if>
-		<a href="${path }/notice_servlet/allnotice.do">관리자모드</a>
+		<a href="staff/index.jsp">관리자모드</a>
 </form>
 </body>
 </html>

@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<c:set var="path" value="${pageContext.request.contextPath }"/> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="include.jsp" %>
+<script src="../script/jquery-3.4.1.min.js"></script>
+
 <title>회원가입</title>
 
 <script>
@@ -45,8 +47,8 @@
 				document.addMemberForm.submit();
 			});
 			$('#btnCancel').click(function(){
-				colsole.lot("btnCancel ok");
-				location.href = "../index.do";
+				console.log("btnCancel ok");
+				location.href = "${path}/index.jsp";
 			});
 		});
 		
@@ -54,16 +56,19 @@
 	</script>
 </head>
 <body>
-	<h2>회원 가입</h2><hr/>
-	'*' 표시 항목은 필수 입력 항목입니다.
-<form action="" name="addMemberForm" method="post" enctype="multipart/form-data">
+<%@ include file="../include/header.jsp" %>
+	<h2>회원 가입</h2>
+
+	<center>
+<form action="" name="addMemberForm" method="post" enctype="multipart/form-data" >
+		'*' 표시 항목은 필수 입력 항목입니다.
 	<table>
 		<tr>
 			<td>*아이디</td>
 			<td>
 			<input type="text" name="id" id="id" size="20"/>
 			<input type="hidden" name="reid" id="reid" size="10"/>
-			<input type="button" value="중복확인" onclick="return idCheck()"/>
+			<input type="button" value="중복확인"  id="" onclick="return idCheck()"/>
 			</td>
 		</tr>
 		<tr>
@@ -84,12 +89,8 @@
 		<tr>
 			<td>이메일</td>
 			<td>
-			<input type="text" name="email1" id="email1" size=20> @
-			<select name="email2" id="email2">
-				<option value="naver.com">naver.com</option>
-				<option value="hanmail.net">hanmail.com</option>
-				<option value="google.com">google.com</option>
-				<option value="직접입력">직접입력</option>
+			<input type="text" name="email" id="email1" size=20>
+			
 			</select>
 			</td>
 		</tr>
@@ -114,10 +115,8 @@
 		<tr>
 			<td>핸드폰</td>
 			<td>
-			<input type="text" name="phone1" id="phone1" size="3"> -
-			<input type="text" name="phone2" id="phone2" size="4"> -
-			<input type="text" name="phone3" id="phone3" size="4">
-			</td>
+			<input type="text" name="phone" id="phone" size="20"> 
+			
 		</tr>
 		<tr>
 			<td>프로필사진</td>
@@ -125,12 +124,13 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-			<input type="button" id="btnAdd" value="가입"/>
-			<input type="reset" id="btnCancel" value="취소"/>
+			<input type="submit" id="btnAdd" value="가입"/>
+			<input type="reset" id="btnCancel" name='btnCancel' value="취소"/>
 			</td>
 		</tr>
 	</table>
-	
+
 </form>
+</center>
 </body>
 </html>

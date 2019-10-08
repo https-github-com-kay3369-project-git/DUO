@@ -2,7 +2,27 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="member">
-
-</mapper>
+   
+   <mapper namespace="member">
+   	
+   	<!-- 회원가입 목록 -->
+   	<select id="memberList" resultType="member.memberDTO">
+   		select id, pwd, nick_name, email, 
+   				address, gender, birth, phone, point, admin
+   		from member1 
+   	</select>
+   
+   <!-- 회원 가입 -->
+   <insert id="insertMember" parameterType="member.memberDTO">
+   	insert into member1
+   			(id, pwd, nick_name, email, address, 
+   			gender, birth, phone,photo)
+		values
+	 	(
+	 		#{id}, #{pwd}, #{nick_name}, #{email}, #{address}, 
+	 		#{gender}, #{birth}, #{phone},#{photo}
+	 	)
+   		
+   </insert>
+   
+   </mapper>

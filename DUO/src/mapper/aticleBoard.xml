@@ -126,4 +126,14 @@
     		select * from b_comment where board_num=#{board_num}
     		order by comment_num ASC
     	</select>  -->
+    	<!-- DB생성후 위에 주석을 처리하시오! -->
+    	<!-- 관리자모드 조회 -->
+    	<select id="listAll" resultType="aticleBoard.aticleBoardDTO">
+    	select * from aticleboard
+    	
+    	</select>
+    	<!--관리자모드 삭제  -->
+    	<delete id="deleteone">
+ 	 	DELETE FROM aticleboard WHERE num = ${num}
+ 		</delete>
     </mapper>

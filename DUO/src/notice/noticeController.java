@@ -195,7 +195,7 @@ public class noticeController extends HttpServlet {
 			  
 			  List<noticeDTO> listAll = dao.listAll();
 			  request.setAttribute("listAll", listAll);
-			  
+			
 			  String page ="/staff/AllnoticeList.jsp";
 			  RequestDispatcher rd = request.getRequestDispatcher(page);
 			  rd.forward(request, response);
@@ -207,6 +207,7 @@ public class noticeController extends HttpServlet {
 
 				String page = request.getContextPath()+"/notice_servlet/allnotice.do";	// 게시물 목록 view 페이지 이동
 				response.sendRedirect(page);
+				
 			  
 		  }
 	}

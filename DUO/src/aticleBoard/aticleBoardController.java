@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import notice.noticeDTO;
+
 
 @WebServlet("/aticle_servlet/*")
 public class aticleBoardController extends HttpServlet {
@@ -297,7 +299,27 @@ public class aticleBoardController extends HttpServlet {
 			rd.forward(request, response);
 			
 		}
+			//관리자모드 조회
+		else if(url.contains("aticleAll.do")) {
+			System.out.println("문의사항 관리자모드 페이지");
 			
+			List<aticleBoardDTO> listAll = dao.listAll();
+			  request.setAttribute("listAll", listAll);
+			  
+			  String page ="/staff/AllaticleList.jsp";
+			  RequestDispatcher rd = request.getRequestDispatcher(page);
+			  rd.forward(request, response);
+			
+		}
+		  else if(url.contains("delnotice.do")) {
+			  System.out.println("관리자모드 문의사항 삭제");
+			  int num = Integer.parseInt(request.getParameter("num"));
+			  dao.deleteone(num);
+			  System.out.println("문의사항 삭제 num"+num);
+				String page = request.getContextPath()+"/aticle_servlet/aticleAll.do";	
+				response.sendRedirect(page);
+			  
+		  }
 		
 	}
 

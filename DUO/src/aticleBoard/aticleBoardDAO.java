@@ -142,4 +142,20 @@ public class aticleBoardDAO {
 		return list;
 	
 	}
+	//관리자 모드 조회 : 성령
+	public List<aticleBoardDTO> listAll() {
+		SqlSession session = MybatisManager.getInstance().openSession();
+		
+		List<aticleBoardDTO> listAll = session.selectList("aticleboard.listAll");	
+		session.close();
+		
+		return listAll;
+	}
+	//관리자 모드 삭제처리 : 성령
+		public void deleteone(Integer num)  {
+			SqlSession session = MybatisManager.getInstance().openSession();
+			session.delete("aticleboard.deleteone",num);
+			session.commit();
+			session.close();
+		}
 }
