@@ -189,6 +189,27 @@ public class noticeController extends HttpServlet {
 				String page = "${path}/notice_servlet/list.do";	// 게시물 목록 view 페이지 이동
 				response.sendRedirect(page);
 		  }
+		  //관리자모드 공지사항 전체목록
+		  else if(url.contains("allnotice.do")) {
+			  System.out.println("관리자모드 공지사항");
+			  
+			  List<noticeDTO> listAll = dao.listAll();
+			  request.setAttribute("listAll", listAll);
+			
+			  String page ="/staff/AllnoticeList.jsp";
+			  RequestDispatcher rd = request.getRequestDispatcher(page);
+			  rd.forward(request, response);
+		  }
+		  else if(url.contains("delnotice.do")) {
+			  System.out.println("관리자모드 공지사항 삭제");
+			  int n_no = Integer.parseInt(request.getParameter("n_no"));
+			  dao.deleteone(n_no);
+
+				String page = request.getContextPath()+"/notice_servlet/allnotice.do";	// 게시물 목록 view 페이지 이동
+				response.sendRedirect(page);
+				
+			  
+		  }
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
