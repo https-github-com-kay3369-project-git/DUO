@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+	<select id="select">
+		SELECT * FROM CHAT WHERE chatTime = #{chatTime} order by chatTime
+	</select>
+	<insert id="insert" parameterType="chat.dto.chatDTO">	<!-- parameterType 생략해도 상관없는데 가독성때문에 -->
+		INSERT INTO CHAT (chatName, chatContent, chatTime) VALUES (#{chatName}, #{chatContent}, #{chatTime})
+	</insert>
+</mapper>
